@@ -1,0 +1,5 @@
+<Project>
+  <PropertyGroup>
+    <ChoiceFrameworks>netstandard2.1</ChoiceFrameworks>
+  </PropertyGroup>
+</Project>
