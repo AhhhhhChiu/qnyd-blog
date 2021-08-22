@@ -20,6 +20,7 @@ namespace Qnyd.User
 {
     internal class QnydAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
     {
+        internal const string TokenKey = "qnyd";
         public Task HandleAsync(RequestDelegate next, 
             HttpContext context, 
             AuthorizationPolicy policy, 
@@ -27,8 +28,27 @@ namespace Qnyd.User
         {
             if (authorizeResult.Challenged)
             {
-                context.Response.StatusCode = 401;
-                return Task.CompletedTask;
+                var ser=context.RequestServices.GetRequiredService<UserIdentityService>();
+                string token = null;
+                if (context.Request.Query.TryGetValue(TokenKey, out var qv) &&
+                    qv.Count > 0)
+                {
+                    token = qv[0];
+                }
+                else if (context.Request.Cookies != null)
+                {
+                    context.Request.Cookies.TryGetValue(TokenKey, out token);
+                }
+                if (token == null)
+                {
+                    var tokenInfo = ser.GetTokenInfo(token);
+                    if (tokenInfo is null)
+                    {
+                        context.Response.StatusCode = 401;
+                        return Task.CompletedTask;
+                    }
+                    context.Features.Set(tokenInfo);
+                }
             }
             return next(context);
         }

@@ -76,13 +76,11 @@ namespace Qnyd.Web
             Run(x => x.ReadyAsync(ctx));
             Run(x => x.AfterReadyAsync(ctx));
 
-#if DEBUG
             using (var scope = app.ApplicationServices.CreateScope())
             using (var db = scope.ServiceProvider.GetRequiredService<QnydDbContext>())
             {
                 db.Database.EnsureCreated();
             }
-#endif
         }
     }
 }

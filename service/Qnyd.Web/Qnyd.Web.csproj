@@ -37,6 +37,7 @@
     <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="5.2.4" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Modules\Qnyd.User\Qnyd.User.csproj" />
     <ProjectReference Include="..\Qnyd.Data\Qnyd.Data.csproj" />
   </ItemGroup>
   <ItemGroup>

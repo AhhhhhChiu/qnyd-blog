@@ -23,6 +23,8 @@ namespace Qnyd.User
             builder.AddApplicationPart(GetType().Assembly);
             context.Services.AddAuthentication();
             context.Services.AddAuthorization();
+            context.Services.AddScoped<UserIdentityService>();
+            context.Services.AddScoped<UserService>();
             context.Services.AddSingleton<IAuthorizationMiddlewareResultHandler,
                           QnydAuthorizationMiddlewareResultHandler>();
             base.Register(context);
