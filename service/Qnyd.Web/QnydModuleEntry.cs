@@ -63,9 +63,9 @@ namespace Qnyd.Web
             if (isDevelopment.GetValueOrDefault(false))
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Qyad.Web v1"));
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Qyad.Web v1"));
             app.UseResponseCompression();
             //app.UseHttpsRedirection();
             return base.BeforeReadyAsync(context);

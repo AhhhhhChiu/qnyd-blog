@@ -38,15 +38,15 @@ namespace Qnyd.User.Controllers
             this.userService = userService;
         }
         [AllowAnonymous]
-        [HttpGet("[action]")]
+        [HttpGet]
         [ProducesResponseType(typeof(EntityResult<RSAKeyIdentity>), 200)]
         public IActionResult FlushKey()
         {
-            var key = userService.FlushRSAKey();
+            var key = userService.GetSharedRSAKey();
             var res = new EntityResult<RSAKeyIdentity> { Entity = key };
             return Ok(res);
         }
-        [HttpGet("[action]")]
+        [HttpGet]
         [ProducesResponseType(typeof(EntityResult<bool>), 200)]
         public IActionResult IsLogin([FromQuery]string token)
         {
@@ -55,7 +55,7 @@ namespace Qnyd.User.Controllers
             return Ok(res);
         }
         [AllowAnonymous]
-        [HttpPost("[action]")]
+        [HttpPost]
         [ProducesResponseType(typeof(EntityResult<string>), 200)]
         public async Task<IActionResult> Login([FromForm] string userName, [FromForm] string passwordHash, [FromForm] string connectId)
         {
@@ -71,7 +71,7 @@ namespace Qnyd.User.Controllers
             return Ok(res);
         }
         [AllowAnonymous]
-        [HttpPost("[action]")]
+        [HttpPost]
         [ProducesResponseType(typeof(EntityResult<bool>), 200)]
         public async Task<IActionResult> Registe([FromForm] string userName, [FromForm] string passwordHash, [FromForm] string connectId)
         {
@@ -89,7 +89,7 @@ namespace Qnyd.User.Controllers
             return Ok(res);
         }
         [AllowAnonymous]
-        [HttpGet("[action]")]
+        [HttpGet]
         [ProducesResponseType(typeof(EntityResult<bool>), 200)]
         public async Task<IActionResult> ResetPwdWithOld(string userName, string old, string pwd)
         {
@@ -98,7 +98,7 @@ namespace Qnyd.User.Controllers
             return Ok(res);
         }
         [AllowAnonymous]
-        [HttpGet("[action]")]
+        [HttpGet]
         [ProducesResponseType(typeof(EntityResult<string>), 200)]
         public async Task<IActionResult> GenerateResetToken(string userName)
         {

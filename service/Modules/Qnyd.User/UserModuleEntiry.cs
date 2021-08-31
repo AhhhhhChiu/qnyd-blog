@@ -34,7 +34,11 @@ namespace Qnyd.User
             var builder = context.GetApplicationBuilder();
             builder.UseAuthentication();
             builder.UseAuthorization();
-
+            using (var scope=context.CreateScope())
+            {
+                var ser = scope.ServiceProvider.GetRequiredService<UserService>();
+                ser.GetSharedRSAKey();
+            }
             return base.ReadyAsync(context);
         }
     }

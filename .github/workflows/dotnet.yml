@@ -1,0 +1,28 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env: 
+      SLN_PATH: service\Qnyd.sln
+      WEB_PATH: service\Qnyd.Web\Qnyd.Web.csproj
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SLN_PATH }}
+      - name: Build
+        run: dotnet build ${{ env.SLN_PATH }} --no-restore
+      - name: Test
+        run: dotnet test ${{ env.SLN_PATH }} --no-build --verbosity normal
+      - name: Publish to win-x64
+        run: dotnet publish ${{ env.WEB_PATH }} -c Release -f net5.0 -r win-x64 /p:PublishTrimmed=true
