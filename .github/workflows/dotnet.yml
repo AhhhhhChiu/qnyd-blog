@@ -19,10 +19,10 @@ jobs:
         with:
           dotnet-version: 5.0.x
       - name: Restore dependencies
-        run: dotnet restore ${{ env.SLN_PATH }}
+        run: dotnet restore $env:SLN_PATH
       - name: Build
-        run: dotnet build ${{ env.SLN_PATH }} --no-restore
+        run: dotnet build $env:SLN_PATH --no-restore
       - name: Test
-        run: dotnet test ${{ env.SLN_PATH }} --no-build --verbosity normal
+        run: dotnet test $env:SLN_PATH --no-build --verbosity normal
       - name: Publish to win-x64
-        run: dotnet publish ${{ env.WEB_PATH }} -c Release -f net5.0 -r win-x64 /p:PublishTrimmed=true
+        run: dotnet publish $env:WEB_PATH -c Release -f net5.0 -r win-x64 /p:PublishTrimmed=true
