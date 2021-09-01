@@ -18,7 +18,7 @@
           placeholder-opacity-25 text-sm"
           type="password" placeholder="Password" />
         <div>
-          <span class="text-indigo-400 ml-1 text-xl el-icon-s-promotion"></span>
+          <span class="button cursor-pointer text-indigo-400 ml-1 text-xl el-icon-s-promotion" />
         </div>
       </div>
     </div>
@@ -38,7 +38,17 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-.card {
-
+.button {
+  transition: 0.3s all ease;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #818CF8;
+  color: #fff;
+  &:hover {
+    transform: scale(10);
+  }
+  &:active {
+    transform: scale(1);
+  }
 }
 </style>
