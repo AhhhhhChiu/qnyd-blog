@@ -44,7 +44,7 @@ instance.interceptors.request.use(
         Object.keys(rParams).forEach((key) => {
           parsedUrl = (parsedUrl as string).replace(`:${key}`, rParams[key]);
         });
-        (parsedUrl as string).replace(/\/:\w*$/, '');
+        parsedUrl = (parsedUrl as string).replace(/\/:\w*$/, '');
       }
       return Promise.resolve({
         ...config,
