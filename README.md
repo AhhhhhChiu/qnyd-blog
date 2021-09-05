@@ -15,6 +15,12 @@ cd client
 npm install
 ```
 
+### Compiles for production
+```
+cd client
+npm run build
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
