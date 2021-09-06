@@ -23,7 +23,7 @@ const handleError = (status: number, message: string) => {
 };
 
 instance.interceptors.response.use(
-  (response: AxiosResponse): AxiosPromise => Promise.resolve(response.data),
+  (response: AxiosResponse): AxiosPromise => Promise.resolve(response),
   (error): AxiosPromise => {
     const { response } = error;
     if (response) {
@@ -44,7 +44,7 @@ instance.interceptors.request.use(
         Object.keys(rParams).forEach((key) => {
           parsedUrl = (parsedUrl as string).replace(`:${key}`, rParams[key]);
         });
-        (parsedUrl as string).replace(/\/:\w*$/, '');
+        parsedUrl = (parsedUrl as string).replace(/\/:\w*$/, '');
       }
       return Promise.resolve({
         ...config,

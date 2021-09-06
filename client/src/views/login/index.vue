@@ -3,42 +3,56 @@
     <div class="rounded-xl bg-white radius pt-20 pb-20 pl-32 pr-32
       flex flex-row justify-center items-center shadow-xl">
       <div class="h-96 w-auto">
-        <img class="w-full h-full" src="/imgs/meat.jpg" alt="">
+        <img class="w-full h-full" src="/imgs/meat.jpg" alt="qnyd">
       </div>
-      <div class="flex flex-col ml-40 w-72">
-        <h1 class="pl-1 text-2xl font-semibold text-gray-600 mb-2">BLOG</h1>
-        <span class="pl-1 text-sm text-gray-400 mb-12">Qnyd blog developed with song jeam</span>
-        <input class="mb-6 border h-11 rounded-xl box-border w-full pl-6 pr-6
-        focus:outline-none placeholder-gray-500
-        placeholder-opacity-25 text-sm"
-          type="text" placeholder="Account" />
-        <input
-          class="mb-12 border h-11 rounded-xl box-border w-full pl-6 pr-6
-          focus:outline-none placeholder-gray-500
-          placeholder-opacity-25 text-sm"
-          type="password" placeholder="Password" />
-        <div>
-          <span class="text-indigo-400 ml-1 text-xl el-icon-s-promotion"></span>
-        </div>
-      </div>
+      <login v-if="currentView === VIEW.LOGIN" @toRegister="handleChangeView(VIEW.REGISTER)" />
+      <register v-if="currentView === VIEW.REGISTER" @toLogin="handleChangeView(VIEW.LOGIN)"/>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import Login from './components/login.vue';
+import Register from './components/register.vue';
 import useApi from '@/api';
 
 export default defineComponent({
+  components: {
+    Login, Register,
+  },
   setup() {
-    const Api = useApi();
-    Api.user.getFlushKey().then((res) => {
-      console.log('res: ', res);
-    });
+    // const Api = useApi();
+    // Api.user.getFlushKey().then((res) => {
+    //   console.log('res: ', res);
+    // });
+    // eslint-disable-next-line no-shadow
+    enum VIEW {
+      LOGIN, REGISTER,
+    }
+    const currentView = ref<VIEW>(VIEW.LOGIN);
+    const handleChangeView = (view: VIEW) => {
+      currentView.value = view;
+    };
+    return {
+      handleChangeView,
+      currentView,
+      VIEW,
+    };
   },
 });
 </script>
 <style lang="scss" scoped>
-.card {
-
+::v-deep .button {
+  transition: 0.3s all ease;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #818CF8;
+  color: #fff;
+  &:hover {
+    transform: scale(10);
+  }
+  &:active {
+    transform: scale(1);
+  }
 }
 </style>

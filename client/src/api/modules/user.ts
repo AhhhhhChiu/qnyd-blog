@@ -1,18 +1,27 @@
-import { AxiosInstance, AxiosPromise } from 'axios';
+import { AxiosInstance, AxiosPromise, SuccessData } from 'axios';
 
-type LandingData = {
+export type LandingData = {
   userName: string,
   passwordHash: string,
   connectId: string,
 };
 
-type UserApi = {
+export type GetFlushKeyResponse = {
+  succeed: boolean,
+  msg: string | null,
+  entity: {
+    key: string,
+    identity: string,
+  },
+};
+
+export type UserApi = {
   getFlushKey: () => AxiosPromise,
   register: (data: LandingData) => AxiosPromise,
   login: (data: LandingData) => AxiosPromise,
 };
 
-export default (fetcher: AxiosInstance): UserApi => {
+export const useUserApi = (fetcher: AxiosInstance): UserApi => {
   /** 获取公钥 */
   const getFlushKey = (): AxiosPromise => fetcher({
     method: 'get',
@@ -23,7 +32,7 @@ export default (fetcher: AxiosInstance): UserApi => {
   const register = (data: LandingData): AxiosPromise => fetcher({
     data,
     method: 'post',
-    url: '/User​/Registe',
+    url: '/User/Registe',
   });
 
   /** 登录 */

@@ -13,6 +13,10 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "typeRoots": [
+      "./types",
+      "./node_modules/vue/types"
+    ],
     "types": [
       "webpack-env"
     ],
