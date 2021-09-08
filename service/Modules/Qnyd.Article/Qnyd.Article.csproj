@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\engs\module.targets" />
 
   <PropertyGroup>
@@ -7,5 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Qnyd.Data\Qnyd.Data.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
+  </ItemGroup>
 </Project>

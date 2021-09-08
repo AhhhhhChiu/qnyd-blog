@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 using Qnyd.Data;
 using Structing;
 using Structing.Core;
@@ -25,7 +26,28 @@ namespace Qnyd.Web
     internal class QnydModuleEntry : AutoModuleEntity
     {
         public override int Order => 23333;
-
+        public override void ReadyRegister(IRegisteContext context)
+        {
+            var config = context.GetConfiguration();
+            var mongoSection = config.GetSection("Mongodb");
+            var mongodbCon = mongoSection["ConnectionString"];
+            var maxConn = mongoSection.GetValue<int>("MaxConnectionPoolSize");
+            var minConn = mongoSection.GetValue<int>("MinConnectionPoolSize");
+            if (maxConn <= 0)
+            {
+                maxConn = 500;
+            }
+            if (minConn <= 0)
+            {
+                minConn = 50;
+            }
+            var setting = MongoClientSettings.FromConnectionString(mongodbCon);
+            setting.MaxConnectionPoolSize = maxConn;
+            setting.MinConnectionPoolSize = minConn;
+            var client = new MongoClient(setting);
+            context.Services.AddSingleton(client);
+            context.Services.AddSingleton<IMongoClient>(client);
+        }
         public override Task StartAsync(IServiceProvider provider)
         {
             var hostBuilder = provider.GetWebHostBuilder();
@@ -51,9 +73,9 @@ namespace Qnyd.Web
         public override void Register(IRegisteContext context)
         {
             var config = context.GetConfiguration();
-            AddDb(context.Services,config);
+            AddDb(context.Services, config);
             AddLang(context.Services);
-            AddSwagger(context.Services);            
+            AddSwagger(context.Services);
             base.Register(context);
         }
         public override Task BeforeReadyAsync(IReadyContext context)
@@ -120,9 +142,9 @@ namespace Qnyd.Web
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Qyad.Web", Version = "v1" });
             });
         }
-        private void AddDb(IServiceCollection services,IConfiguration configuration)
+        private void AddDb(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<QnydDbContext>((provider,builder)=> 
+            services.AddDbContext<QnydDbContext>((provider, builder) =>
             {
 #if DEBUG
                 var loggerFactory = provider.GetRequiredService<ILoggerFactory>();

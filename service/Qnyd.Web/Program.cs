@@ -13,6 +13,7 @@ using NLog.Web.AspNetCore;
 using Qnyd.User;
 using Structing.Core;
 using Microsoft.Extensions.DependencyInjection;
+using Qnyd.Article;
 
 namespace Qnyd.Web
 {
@@ -21,6 +22,7 @@ namespace Qnyd.Web
         private static readonly ModuleCollection moduleEntries = new ModuleCollection
         {
             new QnydModuleEntry(),
+            new ArticleModuleEntiry(),
             new UserModuleEntry()
         };
 

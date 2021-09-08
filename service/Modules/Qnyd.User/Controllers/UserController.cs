@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Qnyd.Data;
@@ -76,6 +77,10 @@ namespace Qnyd.User.Controllers
         public async Task<IActionResult> Registe([FromForm] string userName, [FromForm] string passwordHash, [FromForm] string connectId)
         {
             var succeed = await userService.RegisteAsync(connectId, userName, passwordHash);
+            if (!succeed)
+            {
+                return StatusCode((int)StatusCodes.Status406NotAcceptable);
+            }
             var res = new EntityResult<bool> { Entity = succeed };
             return Ok(res);
         }
