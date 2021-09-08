@@ -23,7 +23,7 @@ const handleError = (status: number, message: string) => {
 };
 
 instance.interceptors.response.use(
-  (response: AxiosResponse): AxiosPromise => Promise.resolve(response),
+  (response): AxiosPromise => Promise.resolve(response),
   (error): AxiosPromise => {
     const { response } = error;
     if (response) {

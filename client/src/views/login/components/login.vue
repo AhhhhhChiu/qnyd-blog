@@ -9,9 +9,8 @@
       type="text" placeholder="Account" />
     <input
       class="mb-6 border h-11 rounded-xl box-border w-full pl-6 pr-6
-      focus:outline-none placeholder-gray-500
-      placeholder-opacity-25 text-sm"
-      v-model="form.passwordHash"
+      focus:outline-none placeholder-gray-500 placeholder-opacity-25 text-sm"
+      v-model="form.passwordHash" @keypress.enter="handleLogin"
       type="password" placeholder="Password" />
     <div class="mb-10 pl-1 text-blue-400 text-xs cursor-pointer">
       <span @click="handleToRegister">还没有账号？qnyd！</span>
@@ -23,31 +22,24 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { ElMessage } from 'element-plus';
-import { defineComponent } from 'vue';
+import { defineEmits } from 'vue';
+import { useRouter } from 'vue-router';
 import { useLanding } from '../hooks/useLanding';
 
-export default defineComponent({
-  setup(_, context) {
-    /** 跳转 */
-    const handleToRegister = (): void => {
-      context.emit('toRegister');
-    };
+/** 跳转 */
+const emit = defineEmits<{(e: 'toRegister'): void}>();
+const handleToRegister = (): void => {
+  emit('toRegister');
+};
 
-    /** 登录 */
-    const {
-      handleSubmit: handleLogin, loading, form,
-    } = useLanding('register', () => {
-      ElMessage.success('登录成功');
-    });
-
-    return {
-      handleLogin,
-      loading,
-      form,
-      handleToRegister,
-    };
-  },
+/** 登录 */
+const router = useRouter();
+const {
+  handleSubmit: handleLogin, loading, form,
+} = useLanding('login', () => {
+  ElMessage.success('登录成功');
+  router.push({ name: 'home' });
 });
 </script>

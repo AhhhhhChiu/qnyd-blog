@@ -9,7 +9,7 @@ module.exports = {
     proxy: {
       '/api/v1': {
         changeOrigin: true,
-        target: 'http://192.168.1.12:5000/',
+        target: 'http://192.168.1.10:5000/',
       },
     },
   },

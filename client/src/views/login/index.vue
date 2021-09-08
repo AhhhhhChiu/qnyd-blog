@@ -10,36 +10,19 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import Login from './components/login.vue';
 import Register from './components/register.vue';
-import useApi from '@/api';
 
-export default defineComponent({
-  components: {
-    Login, Register,
-  },
-  setup() {
-    // const Api = useApi();
-    // Api.user.getFlushKey().then((res) => {
-    //   console.log('res: ', res);
-    // });
-    // eslint-disable-next-line no-shadow
-    enum VIEW {
-      LOGIN, REGISTER,
-    }
-    const currentView = ref<VIEW>(VIEW.LOGIN);
-    const handleChangeView = (view: VIEW) => {
-      currentView.value = view;
-    };
-    return {
-      handleChangeView,
-      currentView,
-      VIEW,
-    };
-  },
-});
+// eslint-disable-next-line no-shadow
+enum VIEW {
+  LOGIN, REGISTER,
+}
+const currentView = ref<VIEW>(VIEW.LOGIN);
+const handleChangeView = (view: VIEW) => {
+  currentView.value = view;
+};
 </script>
 <style lang="scss" scoped>
 ::v-deep .button {

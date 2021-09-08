@@ -2,21 +2,13 @@
   landing
   <el-button @click="handleToRegister">to register</el-button>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { useRouter } from 'vue-router';
 
-export default defineComponent({
-  setup() {
-    const router = useRouter();
-    const handleToRegister = (): void => {
-      router.push({
-        name: 'login',
-      });
-    };
-    return {
-      handleToRegister,
-    };
-  },
-});
+const router = useRouter();
+const handleToRegister = (): void => {
+  router.push({
+    name: 'login',
+  });
+};
 </script>

@@ -9,9 +9,8 @@
       type="text" placeholder="Account" />
     <input
       class="mb-6 border h-11 rounded-xl box-border w-full pl-6 pr-6
-      focus:outline-none placeholder-gray-500
-      placeholder-opacity-25 text-sm"
-      v-model="form.passwordHash"
+      focus:outline-none placeholder-gray-500 placeholder-opacity-25 text-sm"
+      v-model="form.passwordHash" @keypress.enter="handleRegister"
       type="password" placeholder="Password" />
     <div class="mb-10 pl-1 text-blue-400 text-xs cursor-pointer">
       <span @click="handleToLogin">已经有账号了？qnyd！</span>
@@ -23,32 +22,22 @@
     </div>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { ElMessage } from 'element-plus';
-import { defineComponent } from 'vue';
+import { defineEmits } from 'vue';
 import { useLanding } from '../hooks/useLanding';
 
-export default defineComponent({
-  setup(_, context) {
-    /** 跳转 */
-    const handleToLogin = (): void => {
-      context.emit('toLogin');
-    };
+/** 跳转 */
+const emit = defineEmits<{(e: 'toLogin'): void}>();
+const handleToLogin = (): void => {
+  emit('toLogin');
+};
 
-    /** 注册 */
-    const {
-      handleSubmit: handleRegister, loading, form,
-    } = useLanding('register', () => {
-      ElMessage.success('注册成功');
-      handleToLogin();
-    });
-
-    return {
-      handleToLogin,
-      handleRegister,
-      loading,
-      form,
-    };
-  },
+/** 注册 */
+const {
+  handleSubmit: handleRegister, loading, form,
+} = useLanding('register', () => {
+  ElMessage.success('注册成功');
+  handleToLogin();
 });
 </script>

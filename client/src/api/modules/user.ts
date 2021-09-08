@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosPromise, SuccessData } from 'axios';
+import { AxiosInstance, AxiosPromise } from 'axios';
 
 export type LandingData = {
   userName: string,
@@ -39,7 +39,7 @@ export const useUserApi = (fetcher: AxiosInstance): UserApi => {
   const login = (data: LandingData): AxiosPromise => fetcher({
     data,
     method: 'post',
-    url: '/User​/Login',
+    url: '/User/Login',
   });
 
   return {
