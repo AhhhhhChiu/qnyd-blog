@@ -3,12 +3,9 @@
     <h1 class="pl-1 text-2xl font-semibold text-gray-600 mb-2">新账号</h1>
     <span class="pl-1 text-sm text-gray-400 mb-12">注册新账号开始 qnyd</span>
     <input class="mb-6 border h-11 rounded-xl box-border w-full pl-6 pr-6
-      focus:outline-none placeholder-gray-500
-      placeholder-opacity-25 text-sm"
-      v-model="form.userName"
-      type="text" placeholder="Account" />
-    <input
-      class="mb-6 border h-11 rounded-xl box-border w-full pl-6 pr-6
+      focus:outline-none placeholder-gray-500 placeholder-opacity-25 text-sm"
+      v-model="form.userName" type="text" placeholder="Account" />
+    <input class="mb-6 border h-11 rounded-xl box-border w-full pl-6 pr-6
       focus:outline-none placeholder-gray-500 placeholder-opacity-25 text-sm"
       v-model="form.passwordHash" @keypress.enter="handleRegister"
       type="password" placeholder="Password" />

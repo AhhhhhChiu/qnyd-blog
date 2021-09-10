@@ -1,13 +1,16 @@
 <template>
   <div class="nav flex flex-row items-center justify-center">
     <div class="container px-5 flex flex-row items-center justify-between">
-      <span class="text-2xl">QNYD</span>
+      <span class="text-2xl text-gray-700">QNYD</span>
       <ul class="flex flex-row">
-        <li>分类</li>
-        <li>标签</li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li class="text-sm ml-4 text-gray-700 flex-col items-center ml-4">
+          <i class="text-blue-400 iconfont icon-view-grid" />
+          <span class="ml-2">分类</span>
+        </li>
+        <li class="text-sm ml-4 text-gray-700 flex-col items-center ml-4">
+          <i class="text-pink-400 iconfont icon-tag-multiple" />
+          <span class="ml-2">标签</span>
+        </li>
       </ul>
     </div>
   </div>

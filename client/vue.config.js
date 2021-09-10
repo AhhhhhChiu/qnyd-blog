@@ -9,9 +9,16 @@ module.exports = {
     proxy: {
       '/api/v1': {
         changeOrigin: true,
-        target: 'http://192.168.1.10:5000/',
+        target: 'http://192.168.1.5:5000/',
       },
     },
   },
   chainWebpack: (config) => config.resolve.alias.set('@', resolve('src')),
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: '@import "@/assets/css/global.scss";',
+      },
+    },
+  },
 };

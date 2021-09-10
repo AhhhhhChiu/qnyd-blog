@@ -1,5 +1,5 @@
 import axios, {
-  AxiosResponse, AxiosInstance, AxiosPromise, AxiosRequestConfig,
+  AxiosInstance, AxiosPromise, AxiosRequestConfig,
 } from 'axios';
 import { ElMessage } from 'element-plus';
 
