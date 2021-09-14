@@ -1,7 +1,14 @@
 <template>
-  <div class="bg-indigo-100">
+  <div class="bg-blue-50">
     <nav-bar />
-    <div v-for="i in 1000" :key="i">{{i}}</div>
+    <div class="h-1/5 bg-white">
+
+    </div>
+    <div class="h-screen flex justify-center">
+      <div class="container max-w-screen-lg">
+
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>

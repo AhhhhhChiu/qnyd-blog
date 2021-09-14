@@ -37,21 +37,22 @@ instance.interceptors.response.use(
 
 instance.interceptors.request.use(
   (config): Promise<AxiosRequestConfig> => {
-    if (config.data) {
-      let parsedUrl: string | undefined = config.url;
-      if (config.data.rParams) {
-        const { rParams } = config.data;
-        Object.keys(rParams).forEach((key) => {
-          parsedUrl = (parsedUrl as string).replace(`:${key}`, rParams[key]);
-        });
-        parsedUrl = (parsedUrl as string).replace(/\/:\w*$/, '');
-      }
-      return Promise.resolve({
-        ...config,
-        url: parsedUrl,
-        data: config.data.data,
-      });
-    }
+    // if (config.data) {
+    //   let parsedUrl: string | undefined = config.url;
+    //   if (config.data.rParams) {
+    //     const { rParams } = config.data;
+    //     Object.keys(rParams).forEach((key) => {
+    //       parsedUrl = (parsedUrl as string).replace(`:${key}`, rParams[key]);
+    //     });
+    //     parsedUrl = (parsedUrl as string).replace(/\/:\w*$/, '');
+    //   }
+    //   return Promise.resolve({
+    //     ...config,
+    //     url: parsedUrl,
+    //     data: config.data.data,
+    //   });
+    // }
+    console.log(config);
     return Promise.resolve(config);
   },
   (error): AxiosPromise => Promise.reject(error),

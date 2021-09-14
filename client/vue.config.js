@@ -5,11 +5,13 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 module.exports = {
+  lintOnSave: false,
   devServer: {
     proxy: {
       '/api/v1': {
         changeOrigin: true,
-        target: 'http://192.168.1.5:5000/',
+        // target: 'http://192.168.1.6:5000/',
+        target: 'http://10.13.232.212:5000/',
       },
     },
   },

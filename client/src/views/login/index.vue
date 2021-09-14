@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-indigo-100 flex flex-row justify-center items-center min-h-screen bg-">
+  <div class="bg-blue-50 flex flex-row justify-center items-center min-h-screen bg-">
     <div class="rounded-xl bg-white radius pt-20 pb-20 pl-32 pr-32
       flex flex-row justify-center items-center shadow-xl">
       <div class="h-96 w-auto">
@@ -29,7 +29,7 @@ const handleChangeView = (view: VIEW) => {
   transition: 0.3s all ease;
   padding: 10px;
   border-radius: 50%;
-  background-color: #818CF8;
+  background-color: #60A5FA;
   color: #fff;
   &:hover {
     transform: scale(10);
