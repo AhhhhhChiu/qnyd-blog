@@ -1,4 +1,4 @@
-import { createApp, ref, Ref, h, App, watch } from 'vue';
+import { createApp, ref, Ref, h, App, watch, provide } from 'vue';
 import { ElDialog, ElButton } from 'element-plus';
 
 export type DialogActions = {
@@ -16,6 +16,11 @@ export type DialogOptions = {
   callback?: any,
 };
 
+export type Event = () => void;
+export type AfterConfirmEvent = (hide: Event, turnOffLoading: Event, callback?: Event) => void;
+
+const afterConfirmEvent: Ref<AfterConfirmEvent> = ref(() => {});
+
 let dialogInstance: App<any> | null = null;
 const visible = ref<boolean>(false);
 const confirmLoading = ref<boolean>(false);
@@ -29,8 +34,9 @@ const hide = () => {
   turnOffLoading();
   visible.value = false;
 };
-const handleConfirm = () => {
+const handleConfirm = (callback?: any) => {
   confirmLoading.value = true;
+  afterConfirmEvent.value(hide, turnOffLoading, callback);
 };
 const actions: DialogActions = {
   visible,
@@ -49,6 +55,9 @@ const createDialog = (actions: DialogActions, options: DialogOptions) => {
           dialogInstance = null;
         }
       });
+      provide('afterConfirm', (event: AfterConfirmEvent) => {
+        afterConfirmEvent.value = event;
+      });
       const Comp = () => h(
         options.content || 'div', { ...options },
       );
@@ -58,7 +67,7 @@ const createDialog = (actions: DialogActions, options: DialogOptions) => {
             <ElButton size="mini" onClick={ hide }>取消</ElButton>
             <ElButton
               size="mini" type="primary"
-              onClick={ handleConfirm }
+              onClick={ () => handleConfirm(options.callback) }
               loading={ confirmLoading.value }>确认</ElButton>
           </div>
         ),

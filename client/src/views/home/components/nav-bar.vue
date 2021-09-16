@@ -36,7 +36,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, defineExpose } from 'vue';
 import { useDialog } from '@/components/basic-dialog/index';
 import EditGroupDialog from './edit-group-dialog.vue';
 import useApi from '@/api';
@@ -54,12 +54,14 @@ getGroups();
 const toggleEditGroupDialog = () => {
   const { show } = useDialog({
     title: '创建分组',
-    content: EditGroupDialog,
     width: '400px',
+    content: EditGroupDialog,
     callback: getGroups,
   });
   show();
 };
+
+defineExpose({ nav: '1' });
 
 </script>
 <style lang="scss" scoped>
