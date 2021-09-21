@@ -24,7 +24,7 @@ namespace Qnyd.Article.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(Result), 200)]
         public async Task<IActionResult> CreateGroup([FromBody]CreateGroupRequest request)
         {
@@ -36,7 +36,7 @@ namespace Qnyd.Article.Controllers
             return Ok(Result.CreateResult());
         }
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(EntityRangeResult<List<ArticleItem>>), 200)]
         public async Task<IActionResult> GetGroup(int? skip,int? take)
         {
@@ -44,7 +44,7 @@ namespace Qnyd.Article.Controllers
             return Ok(res);
         }
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(Result), 200)]
         public async Task<IActionResult> RemoveGroup(string id)
         {
@@ -60,7 +60,7 @@ namespace Qnyd.Article.Controllers
             return Ok(Result.CreateResult());
         }
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         [ProducesResponseType(typeof(Result), 200)]
         public async Task<IActionResult> UpdateName(string id,string name)
         {
