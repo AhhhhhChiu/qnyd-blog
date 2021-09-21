@@ -29,6 +29,7 @@ export const useLanding = (
     }
     loading.value = true;
     Apis.user.getFlushKey().then((res: AxiosResponse<GetFlushKeyResponse>) => {
+      console.log('getFlushKey: ', res);
       const jse = new JSEncrypt();
       jse.setPublicKey(res.data.entity.key);
       Apis.user[submitMethod]({

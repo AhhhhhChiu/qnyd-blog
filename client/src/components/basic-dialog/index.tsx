@@ -1,6 +1,7 @@
 import { createApp, ref, Ref, h, App, watch, provide } from 'vue';
 import { ElDialog, ElButton } from 'element-plus';
 
+/** 动作 */
 export type DialogActions = {
   visible: Ref<boolean>,
   confirmLoading: Ref<boolean>,
@@ -9,6 +10,7 @@ export type DialogActions = {
   hide: () => void,
 };
 
+/** 配置 */
 export type DialogOptions = {
   title?: string,
   width?: string,
@@ -16,11 +18,12 @@ export type DialogOptions = {
   callback?: any,
 };
 
+/** 钩子 */
 export type Event = () => void;
 export type AfterConfirmEvent = (hide: Event, turnOffLoading: Event, callback?: Event) => void;
-
 const afterConfirmEvent: Ref<AfterConfirmEvent> = ref(() => {});
 
+/** 动作实现 */
 let dialogInstance: App<any> | null = null;
 const visible = ref<boolean>(false);
 const confirmLoading = ref<boolean>(false);
@@ -53,6 +56,7 @@ const createDialog = (actions: DialogActions, options: DialogOptions) => {
         if (!val && dialogInstance) {
           dialogInstance.unmount();
           dialogInstance = null;
+          document.body.removeChild(document.getElementById('global-dialog') as HTMLElement);
         }
       });
       provide('afterConfirm', (event: AfterConfirmEvent) => {

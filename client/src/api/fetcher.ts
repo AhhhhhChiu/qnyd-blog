@@ -3,7 +3,7 @@ import axios, {
 } from 'axios';
 import { ElMessage } from 'element-plus';
 
-const baseURL = '/api/v1';
+export const baseURL = '/api/v1';
 
 const instance: AxiosInstance = axios.create({
   baseURL,
@@ -52,7 +52,7 @@ instance.interceptors.request.use(
     //     data: config.data.data,
     //   });
     // }
-    console.log(config);
+    console.log('config: ', config);
     return Promise.resolve(config);
   },
   (error): AxiosPromise => Promise.reject(error),

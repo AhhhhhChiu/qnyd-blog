@@ -61,8 +61,6 @@ const toggleEditGroupDialog = () => {
   show();
 };
 
-defineExpose({ nav: '1' });
-
 </script>
 <style lang="scss" scoped>
 .nav {

@@ -4,6 +4,7 @@ import 'element-plus/dist/index.css';
 import router from './router';
 import store from './store';
 import App from './App.vue';
+import '@/mock/index';
 
 createApp(App).use(store).use(router).use(ElementPlus)
   .mount('#app');
