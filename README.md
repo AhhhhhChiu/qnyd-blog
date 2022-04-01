@@ -1,7 +1,7 @@
 # qnyd-blog
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAhhhhhChiu%2Fqnyd-blog.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAhhhhhChiu%2Fqnyd-blog?ref=badge_shield)
 
-和送jeam的去你丫的博客
+Blog developed in collaboration with Song Jeam
 
 
 ## License
